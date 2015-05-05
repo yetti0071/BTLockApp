@@ -221,13 +221,7 @@ public class BTLockApp extends ActionBarActivity {
         if(BluetoothChatService.D) Log.e(BluetoothChatService.TAG, "-- ON STOP --");
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // Stop the Bluetooth chat services
-        if (mChatService != null) mChatService.stop();
-        if(BluetoothChatService.D) Log.e(BluetoothChatService.TAG, "--- ON DESTROY ---");
-    }
+
 
     // The Handler that gets information back from the BluetoothChatService
     private final Handler mHandler = new Handler() {
@@ -345,6 +339,10 @@ public class BTLockApp extends ActionBarActivity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
+        // Stop the Bluetooth chat services
+        if (mChatService != null) mChatService.stop();
+        if(BluetoothChatService.D) Log.e(BluetoothChatService.TAG, "--- ON DESTROY ---");
         unregisterReceiver(receiver);
     }
 }
