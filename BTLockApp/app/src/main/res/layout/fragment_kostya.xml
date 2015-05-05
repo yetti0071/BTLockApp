@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.vuher.btlockapp.KostyaActivityFragment"
+    tools:showIn="@layout/activity_kostya"
+    android:background="@android:color/darker_gray">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/serverButton"
+        android:id="@+id/serverButton"
+        android:clickable="true"
+        android:background="#ff6d0001"
+        android:textColor="#ffffffff"
+        android:onClick="onClicServerButton"
+        android:enabled="true"
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/clientButton"
+        android:id="@+id/сдшутеИгеещт"
+        android:clickable="true"
+        android:background="#ff006d3e"
+        android:textColor="#ffffffff"
+        android:onClick="onClickClientButton"
+        android:enabled="true"
+        android:layout_marginBottom="83dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

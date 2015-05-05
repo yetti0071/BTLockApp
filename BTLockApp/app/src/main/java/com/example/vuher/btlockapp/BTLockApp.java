@@ -342,5 +342,10 @@ public class BTLockApp extends ActionBarActivity {
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(receiver);
+    }
 }
 
