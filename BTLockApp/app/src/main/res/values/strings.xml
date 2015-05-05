@@ -6,5 +6,8 @@
     <string name="fail_dialog_title">No BT no Fun</string>
     <string name="ok_dialog_message">Bluetooth is ACTUALLY WORKING NOW!</string>
     <string name="ok_dialog_title">Cool!</string>
+    <string name="title_connecting">connecting</string>
+    <string name="title_not_connected">not connected</string>
+    <string name="title_connected_to">connected to</string>
 
 </resources>
