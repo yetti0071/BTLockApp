@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BTLockApp</string>
+    <string name="ListOfDevices">List Of Devices</string>
+    <string name="action_settings">Settings</string>
+    <string name="fail_dialog_message">I am useless without Bluetooth!</string>
+    <string name="fail_dialog_title">No BT no Fun</string>
+    <string name="ok_dialog_message">Bluetooth is ACTUALLY WORKING NOW!</string>
+    <string name="ok_dialog_title">Cool!</string>
+
+</resources>
