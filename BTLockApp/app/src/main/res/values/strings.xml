@@ -6,5 +6,15 @@
     <string name="fail_dialog_title">No BT no Fun</string>
     <string name="ok_dialog_message">Bluetooth is ACTUALLY WORKING NOW!</string>
     <string name="ok_dialog_title">Cool!</string>
+    <string name="title_activity_kostya">The Lock</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="serverButton">Server</string>
+    <string name="clientButton">Client</string>
+    <string name="title_activity_server">ServerActivity</string>
+    <string name="serverLabel">I am the Server</string>
+    <string name="title_activity_client">ClientActivity</string>
+    <string name="clientLabel">I am the Client</string>
+    <string name="helpText">Select the Role Please</string>
 
 </resources>
