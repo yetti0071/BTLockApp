@@ -2,6 +2,7 @@ package com.example.vuher.btlockapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,18 +10,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 
-public class ClientActivity extends ActionBarActivity {
+public class ClientActivity extends AbstractTalkativeActivity {
     boolean lockedState = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_client);
         final ImageButton button = (ImageButton) findViewById(R.id.blueButton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int imgId;
-                if(lockedState) {
+                if (lockedState) {
                     lockedState = false;
                     imgId = R.drawable.blueunlock;
                 } else {
@@ -28,6 +29,15 @@ public class ClientActivity extends ActionBarActivity {
                     imgId = R.drawable.bluelock;
                 }
                 button.setImageDrawable(getResources().getDrawable(imgId));
+                sendMessages(lockedState ? "unlock":"lock");
+            }
+        });
+        ImageButton bonbon = (ImageButton) findViewById(R.id.blueButton);
+        bonbon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { // listener na click
+                Log.i("click", "0");
+
+                //  listDevices();
             }
         });
     }
