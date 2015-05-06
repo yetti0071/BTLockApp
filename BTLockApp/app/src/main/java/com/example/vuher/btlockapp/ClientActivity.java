@@ -32,14 +32,6 @@ public class ClientActivity extends AbstractTalkativeActivity {
                 sendMessages(lockedState ? "unlock":"lock");
             }
         });
-        ImageButton bonbon = (ImageButton) findViewById(R.id.blueButton);
-        bonbon.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) { // listener na click
-                Log.i("click", "0");
-
-                //  listDevices();
-            }
-        });
     }
 
 
