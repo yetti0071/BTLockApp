@@ -92,7 +92,7 @@ public class KostyaActivity extends AbstractTalkativeActivity {
 
 
 
-
+// TODO delete, it is unused
 
     private float checkDeviceAvailability(BluetoothDevice mBluetoothDevice) {
 

@@ -59,6 +59,8 @@ public class AbstractTalkativeActivity extends ActionBarActivity {
         // Stop the Bluetooth chat services
         if (mChatService != null) mChatService.stop();
         if(BluetoothChatService.D) Log.e(BluetoothChatService.TAG, "--- ON DESTROY ---");
+        // TODO    java.lang.RuntimeException: Unable to destroy activity {com.example.vuher.btlockapp/com.example.vuher.btlockapp.ClientActivity}: java.lang.IllegalArgumentException: Receiver not registered: com.example.vuher.btlockapp.AbstractTalkativeActivity$1@437fede8
+// check if the receiver is created
         unregisterReceiver(receiver);
     }
 
@@ -145,7 +147,7 @@ public class AbstractTalkativeActivity extends ActionBarActivity {
                     //output += device.getName() + "   "+ device.getAddress()+  "   "+ device.getBondState()+" "+checkDeviceAvailability(device)+"\n";
                     //tv.setText(output);
                     sendMessageToDevice(message, device, true);
-                    Thread.sleep(3000);
+                    Thread.sleep(3000);  // TODO  this is again hack to avoid the async processing of messages
                 }
             }else {
                 tv.setText("This Will be a list of devices");
@@ -200,7 +202,7 @@ public class AbstractTalkativeActivity extends ActionBarActivity {
                     switch (msg.arg1) {
                         case BluetoothChatService.STATE_CONNECTED:
                             Log.d(BluetoothChatService.TAG, "CONNECTED");
-                            String message = "unlock";
+                            String message = "unlock"; // TODO this is really ugly, in handler we just call another mChat call maybe it could be fixed somehow
                             byte[] send = message.getBytes();
                             mChatService.write(send);
                             break;
