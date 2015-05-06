@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.vuher.btlockapp.KostyaActivityFragment"
     tools:showIn="@layout/activity_kostya"
-    android:background="@android:color/darker_gray">
+    android:background="#ff013068">
 
     <Button
         android:layout_width="fill_parent"
@@ -14,12 +14,12 @@
         android:text="@string/serverButton"
         android:id="@+id/serverButton"
         android:clickable="true"
-        android:background="#ff6d0001"
+        android:background="#ff0265e7"
         android:textColor="#ffffffff"
         android:onClick="onClicServerButton"
         android:enabled="true"
-        android:layout_marginTop="62dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginBottom="63dp"
+        android:layout_above="@+id/clientButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -27,15 +27,26 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/clientButton"
-        android:id="@+id/сдшутеИгеещт"
+        android:id="@+id/clientButton"
         android:clickable="true"
-        android:background="#ff006d3e"
+        android:background="#ff0265e7"
         android:textColor="#ffffffff"
         android:onClick="onClickClientButton"
         android:enabled="true"
-        android:layout_marginBottom="83dp"
+        android:layout_marginBottom="27dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/keriologo"
+        android:scaleType="fitCenter"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="66dp" />
 
 </RelativeLayout>
