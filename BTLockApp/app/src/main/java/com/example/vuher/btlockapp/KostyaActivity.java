@@ -66,6 +66,11 @@ public class KostyaActivity extends AbstractTalkativeActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void handleMessage(int code) {
+        //do nothing, we are the ones, who talk! We ain't listening to anyone!
+    }
+
 /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
