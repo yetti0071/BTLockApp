@@ -21,7 +21,11 @@ import java.util.Set;
 /**
  * Created by kshabashov on 5/6/2015.
  */
-public class AbstractTalkativeActivity extends ActionBarActivity {
+public abstract class AbstractTalkativeActivity extends ActionBarActivity {
+    protected final String ACT_LOCK = "lock";
+    protected final String ACT_UNLOCK = "unlock";
+    protected final String ACT_LOST = "lost";
+
     protected BluetoothChatService mChatService = null;
     protected BluetoothAdapter mBluetoothAdapter;
     protected final int REQUEST_ENABLE_BT = 6;
@@ -29,6 +33,8 @@ public class AbstractTalkativeActivity extends ActionBarActivity {
     private StringBuffer mOutStringBuffer;
     // Name of the connected device
     private String mConnectedDeviceName = null;
+
+    abstract protected void handleMessage(String code);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

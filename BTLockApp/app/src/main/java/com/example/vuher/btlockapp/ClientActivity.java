@@ -29,11 +29,15 @@ public class ClientActivity extends AbstractTalkativeActivity {
                     imgId = R.drawable.bluelock;
                 }
                 button.setImageDrawable(getResources().getDrawable(imgId));
-                sendMessages(lockedState ? "unlock":"lock");
+                sendMessages(lockedState ? "unlock" : "lock");
             }
         });
     }
 
+    @Override
+    protected void handleMessage(String code) {
+            //do nothing, we are the ones, who talk! We ain't listening to anyone!
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

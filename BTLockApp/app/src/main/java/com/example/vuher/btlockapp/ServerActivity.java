@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 
-public class ServerActivity extends ActionBarActivity {
+public class ServerActivity extends AbstractTalkativeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,20 @@ public class ServerActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_server, menu);
         return true;
+    }
+
+    @Override
+    protected void handleMessage(String code) {
+        ImageView duck = (ImageView) findViewById(R.id.theDuck);
+        switch(code) {
+            case ACT_LOCK:
+            case ACT_LOST:
+                duck.setImageAlpha(1);
+                return;
+            case ACT_UNLOCK:
+                duck.setImageAlpha(1);
+                return;
+        }
     }
 
     @Override
