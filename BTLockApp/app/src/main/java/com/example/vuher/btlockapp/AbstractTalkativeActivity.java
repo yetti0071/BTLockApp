@@ -129,40 +129,28 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
 
 
     /**
-     * broadcasts a message.
-     * @param message  A string of text to send.
+     * broadcasts a message
+     * iterate all paired devices and try to send a message
+     * @param message  A string o f text to send.
      */
     protected void sendMessages(String message) {
         Log.i("info", "broadcasting unlock command");
 
-        ArrayList<String> pairedDevicesToList = new ArrayList<>();
         String output = "";
         try{
             TextView tv = (TextView)findViewById(R.id.listOfDevices);
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-// If there are paired devices
-            if (pairedDevices.size() > 0) {
-                // Loop through paired devices
-                for (BluetoothDevice device : pairedDevices) {
-                    // Add the name and address to an array adapter to show in a ListView
-                    pairedDevicesToList.add(device.getName() + "   "+ device.getAddress());
-                }
-            }
-            if(pairedDevicesToList.size() != 0){
+            // If there are paired devices
+
                 for(BluetoothDevice device : pairedDevices) {
                     //output += device.getName() + "   "+ device.getAddress()+  "   "+ device.getBondState()+" "+checkDeviceAvailability(device)+"\n";
                     //tv.setText(output);
                     sendMessageToDevice(message, device, true);
-                    Thread.sleep(3000);  // TODO  this is again hack to avoid the async processing of messages
                 }
-            }else {
-                tv.setText("This Will be a list of devices");
-            }
         }catch(Exception Ex){
             Log.w("chyba", Ex);
         }
 
-        // iterate all paired devices and try to send a message
     }
 
 

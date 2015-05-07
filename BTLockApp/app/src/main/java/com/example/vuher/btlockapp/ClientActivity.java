@@ -60,10 +60,4 @@ public class ClientActivity extends AbstractTalkativeActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    public void onClickBlueButton(View view) {
-
-    }
-
 }

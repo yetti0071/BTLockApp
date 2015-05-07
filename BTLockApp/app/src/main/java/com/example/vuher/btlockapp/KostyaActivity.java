@@ -91,44 +91,4 @@ public class KostyaActivity extends AbstractTalkativeActivity {
 */
 
 
-
-// TODO delete, it is unused
-
-    private float checkDeviceAvailability(BluetoothDevice mBluetoothDevice) {
-
-        BluetoothSocket mSocket = null;
-
-        Method method;
-        long time = 0;
-        boolean result = false;
-        try {
-            Log.w("chyba", "chyba1");
-            Class<?> clazz = mBluetoothDevice.getClass();
-            Class<?>[] paramTypes = new Class<?>[] {Integer.TYPE};
-            Method m = clazz.getMethod("createRfcommSocket", paramTypes);
-            Object[] params = new Object[] {Integer.valueOf(5)};
-            mSocket = (BluetoothSocket) m.invoke(mBluetoothDevice, params);
-            Log.w("chyba", "chyba2");
-            //  mSocket = mBluetoothDevice.createRfcommSocketToServiceRecord(UUID.randomUUID());
-            time = System.nanoTime();
-            mSocket.connect();
-            Log.w("chyba", "chyba3");
-            mSocket.close();// TODO uncomment if needed
-            Log.w("chyba", "chyba4");
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception Ex){
-            Ex.printStackTrace();
-        } finally {
-            time = System.nanoTime() - time;
-            if(result) {
-                return time/1000000f;
-            } else {
-                return -1;
-            }
-        }
-    }
-
-
 }

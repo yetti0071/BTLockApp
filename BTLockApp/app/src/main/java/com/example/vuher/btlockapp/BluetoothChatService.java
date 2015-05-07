@@ -152,17 +152,10 @@ public class BluetoothChatService {
         if (D) Log.d(TAG, "connect to: " + device);
 
         // Cancel any thread attempting to make a connection
-        if (mState == STATE_CONNECTING) {
-            if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
-        }
-
-        // Cancel any thread currently running a connection
-        if (mConnectedThread != null) {mConnectedThread.cancel(); mConnectedThread = null;}
 
         // Start the thread to connect with the given device
-        mConnectThread = new ConnectThread(device, secure);
-        mConnectThread.start();
-        setState(STATE_CONNECTING);
+        mConnectThread = new ConnectThread(device, secure);  // TODO this is not a thread anymore
+        mConnectThread.run();
     }
 
     /**
@@ -174,11 +167,6 @@ public class BluetoothChatService {
             device, final String socketType) {
         if (D) Log.d(TAG, "connected, Socket Type:" + socketType);
 
-        // Cancel the thread that completed the connection
-        if (mConnectThread != null) {mConnectThread.cancel(); mConnectThread = null;}
-
-        // Cancel any thread currently running a connection
-        if (mConnectedThread != null) {mConnectedThread.cancel(); mConnectedThread = null;}
 
         // Cancel the accept thread because we only want to connect to one device
         if (mSecureAcceptThread != null) {
@@ -201,7 +189,6 @@ public class BluetoothChatService {
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
-        setState(STATE_CONNECTED);
     }
 
     /**
@@ -371,12 +358,13 @@ public class BluetoothChatService {
      * with a device. It runs straight through; the connection either
      * succeeds or fails.
      */
-    private class ConnectThread extends Thread {
+    private class ConnectThread {
         private final BluetoothSocket mmSocket;
         private final BluetoothDevice mmDevice;
         private String mSocketType;
 
-        public ConnectThread(BluetoothDevice device, boolean secure) {
+
+        public ConnectThread(BluetoothDevice device, boolean secure){
             mmDevice = device;
             BluetoothSocket tmp = null;
             mSocketType = secure ? "Secure" : "Insecure";
@@ -395,14 +383,15 @@ public class BluetoothChatService {
                 Log.e(TAG, "Socket Type: " + mSocketType + "create() failed", e);
             }
             mmSocket = tmp;
+
         }
 
         public void run() {
+
             Log.i(TAG, "BEGIN mConnectThread SocketType:" + mSocketType);
-            setName("ConnectThread" + mSocketType);
 
             // Always cancel discovery because it will slow down a connection
-            mAdapter.cancelDiscovery();
+            mAdapter.cancelDiscovery();  //TODO this does not need to be here I guess
 
             // Make a connection to the BluetoothSocket
             try {
@@ -425,7 +414,6 @@ public class BluetoothChatService {
             synchronized (BluetoothChatService.this) {
                 mConnectThread = null;
             }
-
             // Start the connected thread
             connected(mmSocket, mmDevice, mSocketType);
         }
