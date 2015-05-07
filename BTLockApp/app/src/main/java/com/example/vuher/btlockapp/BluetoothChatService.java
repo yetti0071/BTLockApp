@@ -136,6 +136,7 @@ public class BluetoothChatService {
 
         // Start the thread to listen on a BluetoothServerSocket
         if (mSecureAcceptThread == null) {
+            Log.d("a","started accept thread");
             mSecureAcceptThread = new AcceptThread(true);
             mSecureAcceptThread.start();
         }

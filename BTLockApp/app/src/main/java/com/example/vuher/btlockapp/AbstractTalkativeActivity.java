@@ -80,6 +80,7 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         } else {
             mChatService = new BluetoothChatService(getWindow().getContext(), mHandler);
+            mChatService.start();
         }
 
     }
@@ -119,6 +120,7 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
             if(resultCode == Activity.RESULT_OK) {
                 showOkDialog();
                 mChatService = new BluetoothChatService(getWindow().getContext(), mHandler);
+                mChatService.start();
             } else if(resultCode == Activity.RESULT_CANCELED) {
                 showFailDialog();
                 // listDevices();
