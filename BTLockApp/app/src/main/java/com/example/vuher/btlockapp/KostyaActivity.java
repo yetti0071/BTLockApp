@@ -67,7 +67,7 @@ public class KostyaActivity extends AbstractTalkativeActivity {
     }
 
     @Override
-    protected void handleMessage(int code) {
+    protected void handleMessage(Message code) {
         //do nothing, we are the ones, who talk! We ain't listening to anyone!
     }
 
