@@ -35,7 +35,7 @@ public class ClientActivity extends AbstractTalkativeActivity {
     }
 
     @Override
-    protected void handleMessage(String code) {
+    protected void handleMessage(int code) {
             //do nothing, we are the ones, who talk! We ain't listening to anyone!
     }
 

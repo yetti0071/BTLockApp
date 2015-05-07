@@ -22,9 +22,9 @@ import java.util.Set;
  * Created by kshabashov on 5/6/2015.
  */
 public abstract class AbstractTalkativeActivity extends ActionBarActivity {
-    protected final String ACT_LOCK = "lock";
-    protected final String ACT_UNLOCK = "unlock";
-    protected final String ACT_LOST = "lost";
+    protected final int ACT_LOCK = 0;
+    protected final int ACT_UNLOCK = 1;
+    protected final int ACT_LOST = 2;
 
     protected BluetoothChatService mChatService = null;
     protected BluetoothAdapter mBluetoothAdapter;
@@ -34,7 +34,7 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
     // Name of the connected device
     private String mConnectedDeviceName = null;
 
-    abstract protected void handleMessage(String code);
+    abstract protected void handleMessage(int code);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,48 +190,7 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case BluetoothChatService.MESSAGE_STATE_CHANGE:
-                    if(BluetoothChatService.D) Log.i(BluetoothChatService.TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
-                    switch (msg.arg1) {
-                        case BluetoothChatService.STATE_CONNECTED:
-                            Log.d(BluetoothChatService.TAG, "CONNECTED");
-                            String message = "unlock"; // TODO this is really ugly, in handler we just call another mChat call maybe it could be fixed somehow
-                            byte[] send = message.getBytes();
-                            mChatService.write(send);
-                            break;
-                        case BluetoothChatService.STATE_CONNECTING:
-                            Log.d(BluetoothChatService.TAG,"CONNECTING");
-                            break;
-                        case BluetoothChatService.STATE_LISTEN:
-                            Log.d(BluetoothChatService.TAG,"LISTENING");
-                            break;
-                        case BluetoothChatService.STATE_NONE:
-                            Log.d(BluetoothChatService.TAG,"NONE");
-                            break;
-                    }
-                    break;
-                case BluetoothChatService.MESSAGE_WRITE:
-                    byte[] writeBuf = (byte[]) msg.obj;
-                    Log.d(BluetoothChatService.TAG, writeBuf.toString());
-                    break;
-                case BluetoothChatService.MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-                    // construct a string from the valid bytes in the buffer
-                    String readMessage = new String(readBuf, 0, msg.arg1);
-                    Log.d(BluetoothChatService.TAG, readMessage);
-                    break;
-                case BluetoothChatService.MESSAGE_DEVICE_NAME:
-                    // save the connected device's name
-                    mConnectedDeviceName = msg.getData().getString(BluetoothChatService.DEVICE_NAME);
-                    Toast.makeText(getApplicationContext(), "Connected to "
-                            + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-                    break;
-                case BluetoothChatService.MESSAGE_TOAST:
-                    Toast.makeText(getApplicationContext(), msg.getData().getString(BluetoothChatService.TOAST),
-                            Toast.LENGTH_SHORT).show();
-                    break;
-            }
+            AbstractTalkativeActivity.this.handleMessage(msg.what);
         }
     };
 }

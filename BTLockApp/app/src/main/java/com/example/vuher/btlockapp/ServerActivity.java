@@ -25,7 +25,7 @@ public class ServerActivity extends AbstractTalkativeActivity {
     }
 
     @Override
-    protected void handleMessage(String code) {
+    protected void handleMessage(int code) {
         ImageView duck = (ImageView) findViewById(R.id.theDuck);
         switch(code) {
             case ACT_LOCK:
