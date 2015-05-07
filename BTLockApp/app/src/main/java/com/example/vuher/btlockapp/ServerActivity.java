@@ -1,7 +1,9 @@
 package com.example.vuher.btlockapp;
 
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,16 +27,23 @@ public class ServerActivity extends AbstractTalkativeActivity {
     }
 
     @Override
-    protected void handleMessage(int code) {
+    protected void handleMessage(Message msg) {
         ImageView duck = (ImageView) findViewById(R.id.theDuck);
-        switch(code) {
-            case ACT_LOCK:
-            case ACT_LOST:
-                duck.setImageAlpha(0);
-                return;
-            case ACT_UNLOCK:
-                duck.setImageAlpha(1);
-                return;
+        if(msg.what == BluetoothChatService.MESSAGE_READ) {
+            byte[] readBuf = (byte[]) msg.obj;
+            // construct a string from the valid bytes in the buffer
+            String readMessage = new String(readBuf, 0, msg.arg1);
+            Log.d(BluetoothChatService.TAG, readMessage);
+
+            switch (readMessage) {
+                case ACT_LOCK:
+                case ACT_LOST:
+                    duck.setImageAlpha(0);
+                    return;
+                case ACT_UNLOCK:
+                    duck.setImageAlpha(1);
+                    return;
+            }
         }
     }
 

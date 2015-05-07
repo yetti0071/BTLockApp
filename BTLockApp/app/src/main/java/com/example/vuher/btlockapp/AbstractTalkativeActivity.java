@@ -22,9 +22,9 @@ import java.util.Set;
  * Created by kshabashov on 5/6/2015.
  */
 public abstract class AbstractTalkativeActivity extends ActionBarActivity {
-    protected final int ACT_LOCK = 0;
-    protected final int ACT_UNLOCK = 1;
-    protected final int ACT_LOST = 2;
+    protected final String ACT_LOCK = "lock";
+    protected final String ACT_UNLOCK = "unlock";
+    protected final String ACT_LOST = "lost";
 
     protected BluetoothChatService mChatService = null;
     protected BluetoothAdapter mBluetoothAdapter;
@@ -34,7 +34,7 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
     // Name of the connected device
     private String mConnectedDeviceName = null;
 
-    abstract protected void handleMessage(int code);
+    abstract protected void handleMessage(Message msg);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +138,6 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
 
         String output = "";
         try{
-            TextView tv = (TextView)findViewById(R.id.listOfDevices);
             Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
             // If there are paired devices
 
@@ -190,7 +189,7 @@ public abstract class AbstractTalkativeActivity extends ActionBarActivity {
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            AbstractTalkativeActivity.this.handleMessage(msg.what);
+            AbstractTalkativeActivity.this.handleMessage(msg);
         }
     };
 }

@@ -67,6 +67,8 @@ public class BluetoothChatService {
     public static final int MESSAGE_WRITE = 3;
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
+    public static final int MESSAGE_CONECTION_READY = 6;
+
 
 
     // Member fields
@@ -156,6 +158,7 @@ public class BluetoothChatService {
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device, secure);  // TODO this is not a thread anymore
         mConnectThread.run();
+
     }
 
     /**
@@ -163,8 +166,7 @@ public class BluetoothChatService {
      * @param socket  The BluetoothSocket on which the connection was made
      * @param device  The BluetoothDevice that has been connected
      */
-    public synchronized void connected(BluetoothSocket socket, BluetoothDevice
-            device, final String socketType) {
+    public synchronized void connected(BluetoothSocket socket, BluetoothDevice device, final String socketType) {
         if (D) Log.d(TAG, "connected, Socket Type:" + socketType);
 
 
@@ -183,12 +185,12 @@ public class BluetoothChatService {
         mConnectedThread.start();
 
         // Send the name of the connected device back to the UI Activity
-        Message msg = mHandler.obtainMessage(MESSAGE_DEVICE_NAME);
+     /*   Message msg = mHandler.obtainMessage(MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
         bundle.putString(DEVICE_NAME, device.getName());
         msg.setData(bundle);
-        mHandler.sendMessage(msg);
-
+        mHandler.sendMessage(msg); // zprava o pripojeni
+*/
     }
 
     /**
@@ -411,10 +413,11 @@ public class BluetoothChatService {
             }
 
             // Reset the ConnectThread because we're done
-            synchronized (BluetoothChatService.this) {
-                mConnectThread = null;
-            }
+          //  synchronized (BluetoothChatService.this) {
+          //      mConnectThread = null;
+          //  }
             // Start the connected thread
+            Log.w("tag", "starting another thread");
             connected(mmSocket, mmDevice, mSocketType);
         }
 
@@ -452,6 +455,13 @@ public class BluetoothChatService {
 
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
+
+            Message msg = mHandler.obtainMessage(MESSAGE_CONECTION_READY);
+            Bundle bundle = new Bundle();
+            bundle.putString(TOAST, "channel opened");
+            msg.setData(bundle);
+            mHandler.sendMessage(msg); // zprava o pripojeni
+
         }
 
         public void run() {

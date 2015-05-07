@@ -1,5 +1,6 @@
 package com.example.vuher.btlockapp;
 
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,8 +36,12 @@ public class ClientActivity extends AbstractTalkativeActivity {
     }
 
     @Override
-    protected void handleMessage(int code) {
-            //do nothing, we are the ones, who talk! We ain't listening to anyone!
+    protected void handleMessage(Message msg) {
+        String lockString = lockedState ? "unlock" : "lock";
+        if(msg.what == BluetoothChatService.MESSAGE_CONECTION_READY) {
+            mChatService.write(lockString.getBytes());
+        }
+
     }
 
     @Override
