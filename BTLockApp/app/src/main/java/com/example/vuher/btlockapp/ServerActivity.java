@@ -30,7 +30,7 @@ public class ServerActivity extends AbstractTalkativeActivity {
         switch(code) {
             case ACT_LOCK:
             case ACT_LOST:
-                duck.setImageAlpha(1);
+                duck.setImageAlpha(0);
                 return;
             case ACT_UNLOCK:
                 duck.setImageAlpha(1);
